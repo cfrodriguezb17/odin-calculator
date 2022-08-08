@@ -6,31 +6,46 @@ let value = '';
 buttons.addEventListener('click', (event) => {
 if (event.target.getAttribute('btn-raw-data') !== null) {
   let btnText = event.target.getAttribute('btn-raw-data');
-  if (btnText == 'c') {
+  let cleanValues = () => {
     valuesArray = [];
     operandosArray = [];
     value = '';
     display.textContent = '';
     btnText = '';
   }
+  if (btnText == 'c') {
+    cleanValues();
+  }
   display.textContent += btnText;
+  if(display.textContent[0] == '='){
+    btnText = ''
+    display.textContent = ''
+  }
+  if(display.textContent[0] == '0' && display.textContent[1] == '0'){
+    btnText = '0'
+    display.textContent = '0'
+  }
+  if(display.textContent[display.textContent.length - 1] == '0' && display.textContent[display.textContent.length - 2] == '/'){
+    display.textContent = 'No sea loka';
+    setTimeout(cleanValues, 600);
+  }
   if (btnText == '*' || btnText == '-' || btnText == '+' || btnText == '/' || btnText == '=') {
     let operando = btnText;
-    console.log(value);
     value = Number(value);
     if (value != 0) {
       valuesArray.push(value);
     }
     operandosArray.push(operando);
-    console.log(valuesArray.length);
-    console.log(operandosArray);
-    console.log(value);
     if (operandosArray.length > 1 && valuesArray.length > 1) {
+      console.log(valuesArray[1])
+      console.log(operandosArray[0])
       let result = operate(operandosArray[0], valuesArray[0], valuesArray[1]);
-      console.log(result);
       valuesArray = [];
       valuesArray.push(result);
       operandosArray = [];
+      if(!Number.isInteger(result)){
+        result = result.toFixed(4);
+      }
       if (btnText != '='){
         display.textContent =  result + btnText;
         operandosArray.push(btnText);
@@ -53,8 +68,6 @@ if (event.target.getAttribute('btn-raw-data') !== null) {
   }
 }
 })
-
-let give = digit => digit;
 
 let add = (a, b) => a + b;
 
