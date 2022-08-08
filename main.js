@@ -36,9 +36,14 @@ if (event.target.getAttribute('btn-raw-data') !== null) {
       valuesArray.push(value);
     }
     operandosArray.push(operando);
+    if (operandosArray[0] == '=') {
+      operandosArray = [];
+      let momentText = display.textContent;
+      momentText = momentText.substring(0, momentText.length - 1);
+      display.textContent = momentText;
+    }
+    console.log(operandosArray);
     if (operandosArray.length > 1 && valuesArray.length > 1) {
-      console.log(valuesArray[1])
-      console.log(operandosArray[0])
       let result = operate(operandosArray[0], valuesArray[0], valuesArray[1]);
       valuesArray = [];
       valuesArray.push(result);
