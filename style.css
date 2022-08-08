@@ -1,0 +1,45 @@
+body {
+  background-color: #2f3542;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+}
+#display {
+  height: 72px;
+  font-size: 58px;
+  background-color: #dfe4ea;
+  padding: 0 4px;
+  /* direction: rtl; */
+  text-align: right;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  cursor: pointer;
+  background-color: #747d8c;
+  color: #fff;
+  border: none;
+  font-size: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn i {
+  font-size: 48px;
+}
+.btn-op {
+  background-color: #57606f;
+}
+.btn-clear {
+  background-color: #ffa502;
+}
+.btn:active {
+  background-color: #2f3542;
+}
