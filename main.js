@@ -6,20 +6,46 @@ let value = '';
 buttons.addEventListener('click', (event) => {
 if (event.target.getAttribute('btn-raw-data') !== null) {
   let btnText = event.target.getAttribute('btn-raw-data');
+  if (btnText == 'c') {
+    valuesArray = [];
+    operandosArray = [];
+    value = '';
+    display.textContent = '';
+    btnText = '';
+  }
   display.textContent += btnText;
   if (btnText == '*' || btnText == '-' || btnText == '+' || btnText == '/' || btnText == '=') {
     let operando = btnText;
     console.log(value);
     value = Number(value);
-    valuesArray.push(value);
+    if (value != 0) {
+      valuesArray.push(value);
+    }
     operandosArray.push(operando);
-    console.log(valuesArray);
+    console.log(valuesArray.length);
     console.log(operandosArray);
     console.log(value);
-    if (btnText == '=') {
+    if (operandosArray.length > 1 && valuesArray.length > 1) {
       let result = operate(operandosArray[0], valuesArray[0], valuesArray[1]);
       console.log(result);
-      display.textContent =  result;
+      valuesArray = [];
+      valuesArray.push(result);
+      operandosArray = [];
+      if (btnText != '='){
+        display.textContent =  result + btnText;
+        operandosArray.push(btnText);
+      }else{
+        display.textContent =  result;
+
+      }
+    } else if (valuesArray.length >= 1 && operandosArray.length >= 2){
+      operandosArray[0] = operandosArray[1];
+      operandosArray.pop();
+      let momentText = display.textContent;
+      let lastCharacter = momentText[momentText.length - 1];
+      momentText = momentText.substring(0, momentText.length - 2);
+      momentText = momentText + lastCharacter;
+      display.textContent = momentText;
     }
     value = '';
   }else{
